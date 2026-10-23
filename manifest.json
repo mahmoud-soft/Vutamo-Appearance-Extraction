@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "vutamo Appearance",
+  "version": "1.0.0",
+  "description": "vutamo Appearance",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "action": {
+    "default_title": "vutamo Appearance"
+  },
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "host_permissions": [
+    "https://suggestqueries.google.com/*",
+    "https://ipwho.is/*",
+    "https://api.open-meteo.com/*"
+  ]
+}

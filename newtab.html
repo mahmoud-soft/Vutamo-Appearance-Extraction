@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Tab</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/chrome/logo_new_tab.png">
+</head>
+
+<body>
+  <!-- Background Live Video -->
+  <video id="bg-video" src="assets/videos/Background_1.mp4" autoplay muted loop playsinline></video>
+  <script>
+    (function () {
+      try {
+        var v = document.getElementById('bg-video');
+        if (v) {
+          v.src = 'assets/videos/Background_1.mp4';
+          v.muted = true;
+          v.play().catch(function () { });
+        }
+      } catch (e) { }
+    })();
+  </script>
+
+  <!-- Google Header Elements -->
+  <nav class="google-bar">
+    <a href="https://mail.google.com" class="google-link" target="_self">Gmail</a>
+    <a href="https://images.google.com" class="google-link" target="_self">Images</a>
+
+    <!-- Google Apps (9 Dots Grid) -->
+    <div class="google-apps-wrapper">
+      <button id="btn-google-apps" class="google-icon-btn" title="Google apps" aria-label="Google apps">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+          <circle cx="5" cy="5" r="2"></circle>
+          <circle cx="12" cy="5" r="2"></circle>
+          <circle cx="19" cy="5" r="2"></circle>
+          <circle cx="5" cy="12" r="2"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+          <circle cx="19" cy="12" r="2"></circle>
+          <circle cx="5" cy="19" r="2"></circle>
+          <circle cx="12" cy="19" r="2"></circle>
+          <circle cx="19" cy="19" r="2"></circle>
+        </svg>
+      </button>
+
+      <!-- Exact Google Apps Dropdown Menu from Screenshots -->
+      <div id="google-apps-menu" class="google-apps-menu">
+        <div class="apps-scrollable">
+          <!-- Your favorites section (Account excluded) -->
+          <div class="favorites-box">
+            <div class="favorites-header">
+              <span>Your favorites</span>
+              <button id="btn-edit-favorites" class="favorites-pen-btn" title="Edit favorites"
+                aria-label="Edit favorites">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
+            <div class="apps-grid" id="favorites-grid">
+              <a href="https://drive.google.com" class="app-item" data-app-id="drive" target="_self">
+                <img class="app-logo" src="assets/logos/drive.png" alt="Drive">
+                <span>Drive</span>
+              </a>
+              <a href="https://www.youtube.com" class="app-item" data-app-id="youtube" target="_self">
+                <img class="app-logo" src="assets/logos/youtube.png" alt="YouTube">
+                <span>YouTube</span>
+              </a>
+              <a href="https://mail.google.com" class="app-item" data-app-id="gmail" target="_self">
+                <img class="app-logo" src="assets/logos/gmail.png" alt="Gmail">
+                <span>Gmail</span>
+              </a>
+              <a href="https://maps.google.com" class="app-item" data-app-id="maps" target="_self">
+                <img class="app-logo" src="assets/logos/maps.png" alt="Maps">
+                <span>Maps</span>
+              </a>
+              <a href="https://www.google.com" class="app-item" data-app-id="search" target="_self">
+                <img class="app-logo" src="assets/logos/search.png" alt="Search">
+                <span>Search</span>
+              </a>
+              <a href="https://translate.google.com" class="app-item" data-app-id="translate" target="_self">
+                <img class="app-logo" src="assets/logos/translate.png" alt="Translate">
+                <span>Translate</span>
+              </a>
+              <a href="https://photos.google.com" class="app-item" data-app-id="photos" target="_self">
+                <img class="app-logo" src="assets/logos/photos.png" alt="Photos">
+                <span>Photos</span>
+              </a>
+              <a href="https://play.google.com" class="app-item" data-app-id="play" target="_self">
+                <img class="app-logo" src="assets/logos/play.png" alt="Play">
+                <span>Play</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- All Other Google Services from Screenshots -->
+          <div class="apps-grid" id="all-apps-grid">
+            <a href="https://calendar.google.com" class="app-item" data-app-id="calendar" target="_self">
+              <img class="app-logo" src="assets/logos/calendar.png" alt="Calendar">
+              <span>Calendar</span>
+            </a>
+            <a href="https://news.google.com" class="app-item" data-app-id="news" target="_self">
+              <img class="app-logo" src="assets/logos/news.png" alt="News">
+              <span>News</span>
+            </a>
+            <a href="https://meet.google.com" class="app-item" data-app-id="meet" target="_self">
+              <img class="app-logo" src="assets/logos/meet.png" alt="Meet">
+              <span>Meet</span>
+            </a>
+            <a href="https://docs.google.com/videos" class="app-item" data-app-id="vids" target="_self">
+              <img class="app-logo" src="assets/logos/vids.png" alt="Vids">
+              <span>Vids</span>
+            </a>
+            <a href="https://sheets.google.com" class="app-item" data-app-id="sheets" target="_self">
+              <img class="app-logo" src="assets/logos/sheets.png" alt="Sheets">
+              <span>Sheets</span>
+            </a>
+            <a href="https://docs.google.com" class="app-item" data-app-id="docs" target="_self">
+              <img class="app-logo" src="assets/logos/docs.png" alt="Docs">
+              <span>Docs</span>
+            </a>
+            <a href="https://slides.google.com" class="app-item" data-app-id="slides" target="_self">
+              <img class="app-logo" src="assets/logos/slides.png" alt="Slides">
+              <span>Slides</span>
+            </a>
+            <a href="https://one.google.com" class="app-item" data-app-id="google_one" target="_self">
+              <img class="app-logo" src="assets/logos/google_one.png" alt="Google One">
+              <span>Google O...</span>
+            </a>
+            <a href="https://shopping.google.com" class="app-item" data-app-id="shopping" target="_self">
+              <img class="app-logo" src="assets/logos/shopping.png" alt="Shopping">
+              <span>Shopping</span>
+            </a>
+            <a href="https://finance.google.com" class="app-item" data-app-id="finance" target="_self">
+              <img class="app-logo" src="assets/logos/finance.png" alt="Finance">
+              <span>Finance</span>
+            </a>
+            <a href="https://keep.google.com" class="app-item" data-app-id="keep" target="_self">
+              <img class="app-logo" src="assets/logos/keep.png" alt="Keep">
+              <span>Keep</span>
+            </a>
+            <a href="https://myadcenter.google.com" class="app-item" data-app-id="ad_center" target="_self">
+              <img class="app-logo" src="assets/logos/ad_center.png" alt="My Ad Center">
+              <span>My Ad Ce...</span>
+            </a>
+            <a href="https://classroom.google.com" class="app-item" data-app-id="classroom" target="_self">
+              <img class="app-logo" src="assets/logos/classroom.png" alt="Classroom">
+              <span>Classroom</span>
+            </a>
+            <a href="https://chat.google.com" class="app-item" data-app-id="chat" target="_self">
+              <img class="app-logo" src="assets/logos/chat.png" alt="Chat">
+              <span>Chat</span>
+            </a>
+            <a href="https://earth.google.com" class="app-item" data-app-id="earth" target="_self">
+              <img class="app-logo" src="assets/logos/earth.png" alt="Earth">
+              <span>Earth</span>
+            </a>
+            <a href="https://www.google.com/interests/saved" class="app-item" data-app-id="saved" target="_self">
+              <img class="app-logo" src="assets/logos/saved.png" alt="Saved">
+              <span>Saved</span>
+            </a>
+            <a href="https://artsandculture.google.com" class="app-item" data-app-id="arts" target="_self">
+              <img class="app-logo" src="assets/logos/arts.png" alt="Arts and Culture">
+              <span>Arts and ...</span>
+            </a>
+            <a href="https://ads.google.com" class="app-item" data-app-id="ads" target="_self">
+              <img class="app-logo" src="assets/logos/ads.png" alt="Google Ads">
+              <span>Google Ads</span>
+            </a>
+            <a href="https://merchants.google.com" class="app-item" data-app-id="merchant" target="_self">
+              <img class="app-logo" src="assets/logos/merchant.png" alt="Merchant Center">
+              <span>Merchant ...</span>
+            </a>
+            <a href="https://contacts.google.com" class="app-item" data-app-id="contacts" target="_self">
+              <img class="app-logo" src="assets/logos/contacts.png" alt="Contacts">
+              <span>Contacts</span>
+            </a>
+            <a href="https://www.google.com/travel" class="app-item" data-app-id="travel" target="_self">
+              <img class="app-logo" src="assets/logos/travel.png" alt="Travel">
+              <span>Travel</span>
+            </a>
+            <a href="https://forms.google.com" class="app-item" data-app-id="forms" target="_self">
+              <img class="app-logo" src="assets/logos/forms.png" alt="Forms">
+              <span>Forms</span>
+            </a>
+            <a href="https://books.google.com" class="app-item" data-app-id="books" target="_self">
+              <img class="app-logo" src="assets/logos/books.png" alt="Books">
+              <span>Books</span>
+            </a>
+            <a href="https://chromewebstore.google.com" class="app-item" data-app-id="cws" target="_self">
+              <img class="app-logo" src="assets/logos/cws.png" alt="Chrome Web Store">
+              <span>Chrome ...</span>
+            </a>
+            <a href="https://passwords.google.com" class="app-item" data-app-id="passwords" target="_self">
+              <img class="app-logo" src="assets/logos/passwords.png" alt="Password Manager">
+              <span>Password ...</span>
+            </a>
+            <a href="https://analytics.google.com" class="app-item" data-app-id="analytics" target="_self">
+              <img class="app-logo" src="assets/logos/analytics.png" alt="Google Analytics">
+              <span>Google A...</span>
+            </a>
+            <a href="https://www.blogger.com" class="app-item" data-app-id="blogger" target="_self">
+              <img class="app-logo" src="assets/logos/blogger.png" alt="Blogger">
+              <span>Blogger</span>
+            </a>
+            <a href="https://music.youtube.com" class="app-item" data-app-id="ytmusic" target="_self">
+              <img class="app-logo" src="assets/logos/ytmusic.png" alt="YouTube Music">
+              <span>YouTube ...</span>
+            </a>
+            <a href="https://wallet.google.com" class="app-item" data-app-id="wallet" target="_self">
+              <img class="app-logo" src="assets/logos/wallet.png" alt="Wallet">
+              <span>Wallet</span>
+            </a>
+            <a href="https://tasks.google.com" class="app-item" data-app-id="tasks" target="_self">
+              <img class="app-logo" src="assets/logos/tasks.png" alt="Tasks">
+              <span>Tasks</span>
+            </a>
+            <a href="https://fonts.google.com" class="app-item" data-app-id="fonts" target="_self">
+              <img class="app-logo" src="assets/logos/fonts.png" alt="Fonts">
+              <span>Fonts</span>
+            </a>
+          </div>
+
+          <!-- More from Google Button -->
+          <div class="apps-more-box">
+            <a href="https://about.google/products/" target="_self" class="apps-more-btn">
+              More from Google
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Account Avatar Button & Exact Card -->
+    <div class="google-account-wrapper">
+      <button id="btn-google-account" class="google-avatar-btn" title="Google Account" aria-label="Google Account">
+        <div class="google-avatar-circle">U</div>
+      </button>
+
+      <!-- Exact Google Account Card Popup -->
+      <div id="google-account-card" class="google-account-card">
+        <!-- Close Button (Font Awesome xmark) -->
+        <button id="btn-close-account" class="account-close-btn" title="Close" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <!-- Profile Header Section (No Arrow, Solid Black U with White Border) -->
+        <div class="account-header-box">
+          <div class="account-avatar-wrapper">
+            <div class="account-card-avatar-circle">U</div>
+          </div>
+
+          <div class="account-info-col">
+            <div class="account-name" id="account-name">Hello User</div>
+          </div>
+        </div>
+
+        <!-- Middle Action Box (Font Awesome Icons) -->
+        <div class="account-action-box">
+          <a href="https://accounts.google.com/AddSession" target="_self" class="account-action-row">
+            <div class="action-row-icon">
+              <i class="fa-solid fa-circle-plus"></i>
+            </div>
+            <span>Add another account</span>
+          </a>
+
+          <div class="action-divider"></div>
+
+          <a href="https://accounts.google.com/Logout" target="_self" class="account-action-row">
+            <div class="action-row-icon">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </div>
+            <span>Sign out</span>
+          </a>
+        </div>
+
+        <!-- Manage your Google Account Button (Official Google Colored G Logo) -->
+        <a href="https://myaccount.google.com" target="_self" class="account-pill-btn">
+          <div class="pill-btn-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <path fill="#4285F4"
+                d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z" />
+              <path fill="#34A853"
+                d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.13C3.27 21.43 7.33 24 12 24z" />
+              <path fill="#FBBC05"
+                d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.13z" />
+              <path fill="#EA4335"
+                d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.27 2.57 1.25 6.58l4.03 3.13c.95-2.83 3.6-4.96 6.72-4.96z" />
+            </svg>
+          </div>
+          <span>Manage your Google Account</span>
+        </a>
+
+        <!-- Get a Google AI plan Button (Font Awesome Sparkles) -->
+        <a href="https://one.google.com/explore-plan/gemini-advanced" target="_self" class="account-pill-btn">
+          <div class="pill-btn-icon">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <span>Get a Google AI plan</span>
+        </a>
+
+        <!-- Footer Links -->
+        <div class="account-footer-links">
+          <a href="https://policies.google.com/privacy" target="_self" class="legal-link">Privacy Policy</a>
+          <span class="legal-dot">•</span>
+          <a href="https://policies.google.com/terms" target="_self" class="legal-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Center Clock & Gregorian Date & Weather & Search & Shortcuts -->
+  <main class="center-content">
+    <div class="clock-wrapper">
+      <div class="clock-time" id="clock-time">
+        <span id="clock-digits">12:00</span>
+        <span id="clock-seconds" class="clock-seconds" style="display: none;">:00</span>
+        <span id="clock-period" class="clock-period">PM</span>
+      </div>
+      <div class="clock-date" id="clock-date">Friday, 2/10/2026</div>
+      <div class="weather-wrapper" id="weather-wrapper">
+        <span class="weather-icon" id="weather-icon"><svg class="weather-sun-svg" viewBox="0 0 24 24" width="19"
+            height="19" fill="none" stroke="#FFC107" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4.5" fill="#FFC107"></circle>
+            <line x1="12" y1="1.5" x2="12" y2="4"></line>
+            <line x1="12" y1="20" x2="12" y2="22.5"></line>
+            <line x1="4.5" y1="4.5" x2="6.3" y2="6.3"></line>
+            <line x1="17.7" y1="17.7" x2="19.5" y2="19.5"></line>
+            <line x1="1.5" y1="12" x2="4" y2="12"></line>
+            <line x1="20" y1="12" x2="22.5" y2="12"></line>
+            <line x1="4.5" y1="19.5" x2="6.3" y2="17.7"></line>
+            <line x1="17.7" y1="6.3" x2="19.5" y2="4.5"></line>
+          </svg></span>
+        <span class="weather-temp" id="weather-temp">--°C</span>
+        <span class="weather-separator">•</span>
+        <span class="weather-city" id="weather-city">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Search Section (Rectangular) -->
+    <form class="search-form" id="search-form" action="https://www.google.com/search" method="GET" autocomplete="off">
+      <div class="search-bar" id="search-bar">
+        <button type="submit" class="search-submit-btn" aria-label="Search">
+          <svg class="search-icon-svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path
+              d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+          </svg>
+        </button>
+
+        <input type="text" name="q" id="search-input" class="search-input" autocomplete="off" spellcheck="false" />
+
+        <div class="search-divider" aria-hidden="true"></div>
+
+        <div class="search-tools">
+          <!-- Google Lens (Camera) -->
+          <button type="button" class="tool-btn" id="btn-lens-search" title="Search by image"
+            aria-label="Search by image">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor">
+              <path
+                d="M7 4h1.18l.82-1.33A2.003 2.003 0 0 1 10.7 1.5h2.6c.66 0 1.28.34 1.7.87L15.82 4H17c2.21 0 4 1.79 4 4v2h-2.2V8c0-1-.8-1.8-1.8-1.8h-1.8l-1-1.6c-.2-.3-.5-.5-.9-.5h-2.6c-.4 0-.7.2-.9.5L7.8 6.2H6c-1 0-1.8.8-1.8 1.8v9c0 1 .8 1.8 1.8 1.8h3.2v2.2H6c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z" />
+              <circle cx="12" cy="12" r="3.2" />
+              <circle cx="18.5" cy="18.5" r="2.2" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Suggestions Dropdown -->
+      <div class="search-suggestions" id="search-suggestions"></div>
+    </form>
+
+    <!-- Shortcuts Grid Section -->
+    <div class="shortcuts-section" id="shortcuts-section">
+      <div class="shortcuts-grid" id="shortcuts-grid"></div>
+    </div>
+  </main>
+
+  <!-- Add / Edit Shortcut Modal -->
+  <div class="shortcut-modal-overlay" id="shortcut-modal-overlay">
+    <div class="shortcut-modal" id="shortcut-modal">
+      <h3 class="modal-title" id="modal-title">Add shortcut</h3>
+      <div class="modal-form-group">
+        <label for="shortcut-name-input">Name</label>
+        <input type="text" id="shortcut-name-input" placeholder="" autocomplete="off" />
+      </div>
+      <div class="modal-form-group">
+        <label for="shortcut-url-input">URL</label>
+        <input type="url" id="shortcut-url-input" placeholder="" autocomplete="off" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="modal-btn modal-cancel-btn" id="btn-cancel-shortcut">Cancel</button>
+        <button type="button" class="modal-btn modal-save-btn" id="btn-save-shortcut">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom-Left Dynamic Greeting -->
+  <div class="bottom-left-greeting" id="bottom-left-greeting">
+    <span class="greeting-text" id="greeting-text"></span><span class="typewriter-cursor">|</span>
+  </div>
+
+  <!-- Settings Trigger Button (Above Branding) -->
+  <button type="button" class="settings-trigger-btn" id="btn-settings" title="Settings" aria-label="Settings">
+    <i class="fa-solid fa-gear"></i>
+  </button>
+
+  <!-- Bottom-Right Branding: Mahmoud Logo + Divider + Vutamo Logo + Divider + Appearance -->
+  <div class="bottom-branding" id="bottom-branding">
+    <a href="https://mahmoudsoft.com" target="_blank" rel="noopener noreferrer" title="Visit Mahmoud Soft"
+      class="branding-link">
+      <img src="images/logo_mahmoud.png" alt="Mahmoud" class="branding-logo">
+    </a>
+    <span class="branding-divider"></span>
+    <img src="images/logo_vutamo.png" alt="Vutamo" class="branding-logo-vutamo">
+    <span class="branding-divider"></span>
+    <span class="branding-appearance">Appearance</span>
+  </div>
+
+  <!-- Settings Drawer Overlay -->
+  <div class="settings-drawer-overlay" id="settings-drawer-overlay"></div>
+
+  <!-- Settings Side Panel (Slides from Right) -->
+  <aside class="settings-drawer" id="settings-drawer" aria-label="Settings panel">
+    <div class="settings-drawer-header">
+      <div class="settings-drawer-title">
+        <i class="fa-solid fa-sliders"></i>
+        <span>Settings</span>
+      </div>
+      <button type="button" class="settings-drawer-close" id="btn-close-settings" title="Close"
+        aria-label="Close settings">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="settings-drawer-body">
+
+      <!-- Setting 1: Clock Format (12h vs 24h) & Show Seconds -->
+      <div class="setting-item">
+        <div class="setting-info">
+          <div class="setting-label">
+            <i class="fa-regular fa-clock"></i>
+            <span>Clock Format</span>
+          </div>
+          <p class="setting-desc">Choose 12-hour or 24-hour time system</p>
+        </div>
+        <div class="setting-segmented-control" id="clock-format-control">
+          <button type="button" class="segment-btn active" data-format="12h">12 Hours</button>
+          <button type="button" class="segment-btn" data-format="24h">24 Hours</button>
+        </div>
+
+        <div class="setting-sub-divider"></div>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-label">
+              <i class="fa-solid fa-stopwatch"></i>
+              <span>Show Seconds</span>
+            </div>
+            <p class="setting-desc">Display seconds in center clock</p>
+          </div>
+          <label class="vutamo-switch">
+            <input type="checkbox" id="toggle-clock-seconds">
+            <span class="vutamo-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Setting 2: Background Blur -->
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-label">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>Background Blur</span>
+            </div>
+            <p class="setting-desc">Apply soft frosted blur to background</p>
+          </div>
+          <label class="vutamo-switch">
+            <input type="checkbox" id="toggle-bg-blur">
+            <span class="vutamo-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-sub-control hidden" id="blur-slider-group">
+          <div class="slider-header">
+            <span>Blur Intensity</span>
+            <span class="slider-val-badge" id="blur-val-badge">8px</span>
+          </div>
+          <input type="range" id="input-blur-amount" min="2" max="24" step="1" value="8" class="vutamo-range">
+        </div>
+      </div>
+
+      <!-- Setting 3: Show / Hide Shortcuts Section (All websites under search) -->
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-label">
+              <i class="fa-solid fa-table-cells-large"></i>
+              <span>Shortcuts Section</span>
+            </div>
+            <p class="setting-desc">Show or hide all websites and shortcuts below search</p>
+          </div>
+          <label class="vutamo-switch">
+            <input type="checkbox" id="toggle-shortcuts-section" checked>
+            <span class="vutamo-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>

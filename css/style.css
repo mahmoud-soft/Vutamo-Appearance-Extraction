@@ -1,0 +1,1920 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Background Video */
+#bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center bottom;
+  display: block;
+  z-index: 1;
+  filter: blur(var(--bg-blur, 0px));
+  transition: filter 0.3s ease, opacity 0.25s ease;
+}
+
+/* Google Navigation Bar */
+.google-bar {
+  position: fixed;
+  top: 14px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 50;
+  user-select: none;
+}
+
+.google-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  opacity: 0.92;
+  transition: opacity 0.15s ease;
+  padding: 6px 4px;
+}
+
+.google-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.google-apps-wrapper,
+.google-account-wrapper {
+  position: relative;
+}
+
+.google-icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: background-color 0.2s ease;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+}
+
+.google-icon-btn:hover,
+.google-icon-btn.active {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Google Account Profile Button */
+.google-avatar-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.google-avatar-btn:hover,
+.google-avatar-btn.active {
+  transform: scale(1.08);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* U Avatar Circle - Pure Solid Black, NO Gradient, White Border */
+.google-avatar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #000000;
+  border: 1.5px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+/* Google Apps Dropdown Menu - Exact Match from Screenshots */
+.google-apps-menu {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 340px;
+  background: #1f1f1f;
+  border-radius: 28px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
+  display: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.google-apps-menu.open {
+  display: block;
+  animation: fadeInMenu 0.15s ease-out;
+}
+
+.apps-scrollable {
+  max-height: 480px;
+  overflow-y: auto;
+  padding: 14px 10px 16px 10px;
+  border-radius: 28px;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  transition: mask-image 0.2s ease, -webkit-mask-image 0.2s ease;
+}
+
+.apps-scrollable::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
+}
+
+.apps-scrollable.scrolled-top {
+  mask-image: linear-gradient(to bottom, transparent 0px, black 28px, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 28px, black 100%);
+}
+
+/* Favorites Box */
+.favorites-box {
+  background: #131314;
+  border-radius: 22px;
+  padding: 12px 8px 14px 8px;
+  margin-bottom: 12px;
+}
+
+.favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 10px 10px 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #f1f3f4;
+}
+
+.favorites-pen-btn {
+  background: transparent;
+  border: none;
+  color: #9aa0a6;
+  font-size: 13px;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s, color 0.15s, transform 0.15s;
+}
+
+.favorites-pen-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.favorites-pen-btn.active {
+  background: #ffffff;
+  color: #131314;
+  transform: scale(1.08);
+}
+
+/* Apps Grid */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 4px;
+  min-height: 48px;
+  transition: background-color 0.2s, outline 0.2s;
+  border-radius: 16px;
+}
+
+.apps-grid.drag-target {
+  background: rgba(255, 255, 255, 0.08);
+  outline: 1.5px dashed rgba(255, 255, 255, 0.4);
+}
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 4px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: #f1f3f4;
+  font-size: 12px;
+  font-weight: 400;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  position: relative;
+}
+
+.app-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Edit Mode Jiggle & Drag-and-drop */
+@keyframes appJiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-2.2deg) translateY(-0.5px);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(2.2deg) translateY(0.5px);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.edit-mode .app-item {
+  animation: appJiggle 0.24s infinite ease-in-out;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: element;
+}
+
+.edit-mode .app-item:nth-child(2n) {
+  animation-duration: 0.28s;
+  animation-delay: -0.07s;
+  animation-direction: reverse;
+}
+
+.edit-mode .app-item:nth-child(3n) {
+  animation-duration: 0.22s;
+  animation-delay: -0.14s;
+}
+
+.edit-mode .app-item:nth-child(5n) {
+  animation-duration: 0.26s;
+  animation-delay: -0.03s;
+}
+
+.edit-mode .app-item:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.edit-mode .app-item.dragging {
+  opacity: 0.35;
+  transform: scale(1.1) !important;
+  animation: none !important;
+  cursor: grabbing;
+}
+
+.app-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+
+.app-item span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 84px;
+  text-align: center;
+}
+
+/* More from Google Box */
+.apps-more-box {
+  padding: 22px 0 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.apps-more-btn {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.apps-more-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Google Account Card Popup */
+.google-account-card {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 370px;
+  background: #1f1f1f;
+  border-radius: 28px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 16px 20px 16px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+  color: #e3e3e3;
+  user-select: none;
+}
+
+.google-account-card.open {
+  display: flex;
+  animation: fadeInMenu 0.15s ease-out;
+}
+
+/* Close Button (X) */
+.account-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #9aa0a6;
+  font-size: 16px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s, color 0.15s;
+  z-index: 10;
+}
+
+.account-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* Header Box */
+.account-header-box {
+  background: #131314;
+  border-radius: 24px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 38px;
+}
+
+.account-avatar-wrapper {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+}
+
+/* Pure Black Background with White Border for Card Avatar */
+.account-card-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #000000;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.account-info-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.account-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #f1f3f4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Action Box (Add Account & Sign Out) */
+.account-action-box {
+  background: #131314;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.account-action-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #f1f3f4;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.15s;
+}
+
+.account-action-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Font Awesome Icons Styling */
+.action-row-icon i {
+  font-size: 18px;
+  color: #9aa0a6;
+  width: 22px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0 16px;
+}
+
+/* Pill Buttons */
+.account-pill-btn {
+  background: #131314;
+  border-radius: 9999px;
+  padding: 13px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: #f1f3f4;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.15s;
+}
+
+.account-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.pill-btn-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+}
+
+.pill-btn-icon svg {
+  display: block;
+}
+
+.pill-btn-icon i {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* Legal Footer */
+.account-footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 8px;
+  font-size: 12px;
+}
+
+.legal-link {
+  color: #9aa0a6;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.legal-link:hover {
+  color: #e3e3e3;
+}
+
+.legal-dot {
+  color: #5f6368;
+}
+
+@keyframes fadeInMenu {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Poppins Font Declarations (Local Offline Files) */
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Kufi Arabic';
+  src: url('../assets/fonts/NotoKufiArabic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('../assets/fonts/Caveat.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Clock Display (Top Positioned & Bold Poppins) */
+.center-content {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 8.5vh;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+}
+
+.clock-wrapper {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.clock-time {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  color: #ffffff;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 130px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-shadow: none;
+}
+
+.clock-time.has-seconds {
+  font-size: 110px;
+}
+
+#clock-digits {
+  display: inline-block;
+}
+
+.clock-seconds {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 54px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.88);
+  margin-left: 6px;
+  vertical-align: baseline;
+  display: inline-block;
+  user-select: none;
+}
+
+.clock-period {
+  position: absolute;
+  left: calc(100% + 14px);
+  bottom: 22px;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: none;
+  white-space: nowrap;
+}
+
+.clock-date {
+  margin-top: 10px;
+  font-family: 'Poppins', 'Noto Kufi Arabic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: none;
+  user-select: none;
+  text-align: center;
+}
+
+/* Weather Display (No shadow, clean icons) */
+.weather-wrapper {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3px;
+  text-shadow: none;
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+.weather-icon {
+  font-size: 16px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  text-shadow: none;
+}
+
+.weather-icon-sun {
+  color: #ffc107;
+  font-size: 17px;
+  filter: none;
+  text-shadow: none;
+}
+
+.weather-icon-moon {
+  color: #e2e8f0;
+  font-size: 15px;
+  text-shadow: none;
+}
+
+.weather-icon-partly {
+  color: #fde047;
+  font-size: 16px;
+  text-shadow: none;
+}
+
+.weather-icon-cloud,
+.weather-icon-fog {
+  color: #cbd5e1;
+  font-size: 16px;
+  text-shadow: none;
+}
+
+.weather-icon-rain {
+  color: #60a5fa;
+  font-size: 16px;
+  text-shadow: none;
+}
+
+.weather-icon-storm {
+  color: #f59e0b;
+  font-size: 16px;
+  text-shadow: none;
+}
+
+.weather-icon-snow {
+  color: #93c5fd;
+  font-size: 16px;
+  text-shadow: none;
+}
+
+.weather-temp {
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.weather-separator {
+  opacity: 0.5;
+  font-size: 12px;
+  text-shadow: none;
+}
+
+.weather-city {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  text-shadow: none;
+}
+
+/* Transparent Search Bar Section (Rectangular) */
+.search-form {
+  margin-top: 22px;
+  width: 100%;
+  max-width: 620px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.search-bar {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  padding: 0 10px 0 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: text;
+}
+
+.search-bar:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.28);
+}
+
+.search-bar:focus-within {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.search-submit-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  margin-right: 14px;
+  flex-shrink: 0;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.search-submit-btn:hover {
+  color: #ffffff;
+  transform: scale(1.18);
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.35));
+}
+
+.search-icon-svg {
+  display: block;
+}
+
+.search-input {
+  flex: 1;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Poppins', 'Noto Kufi Arabic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  padding: 0;
+  min-width: 0;
+  caret-color: #ffffff;
+}
+
+.search-input.is-arabic {
+  font-family: 'Noto Kufi Arabic', 'Poppins', -apple-system, sans-serif !important;
+  font-size: 15.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+}
+
+.search-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0 4px 0 8px;
+  flex-shrink: 0;
+}
+
+.search-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.tool-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease, filter 0.2s ease;
+  position: relative;
+}
+
+.tool-btn:hover {
+  background: transparent;
+  color: #ffffff;
+  transform: scale(1.18);
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.35));
+}
+
+/* Suggestions Dropdown */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: none;
+  z-index: 100;
+  padding: 6px 0;
+}
+
+.search-suggestions.show {
+  display: block;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 20px;
+  color: #ffffff;
+  font-family: 'Poppins', 'Noto Kufi Arabic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  user-select: none;
+  text-align: left;
+}
+
+.suggestion-item.is-arabic {
+  font-family: 'Noto Kufi Arabic', -apple-system, sans-serif !important;
+  direction: rtl;
+  text-align: right;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.suggestion-icon {
+  color: rgba(255, 255, 255, 0.75);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.suggestion-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Shortcuts Section (Under Search Bar) */
+.shortcuts-section {
+  margin-top: 26px;
+  width: 100%;
+  max-width: 660px;
+  pointer-events: auto;
+}
+
+.shortcuts-section.hidden {
+  display: none !important;
+}
+
+.shortcuts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Individual Shortcut Card (Exact Square, No Blur, Transparent White) */
+.shortcut-card {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  aspect-ratio: 1 / 1;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 6px 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.shortcut-card:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+/* 3-dots Menu Button */
+.shortcut-more-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+  z-index: 5;
+}
+
+.shortcut-card:hover .shortcut-more-btn {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.shortcut-more-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+/* Dropdown Menu for 3-dots (Edit & Delete) */
+.shortcut-dropdown {
+  position: absolute;
+  top: 28px;
+  right: 6px;
+  background: rgba(26, 28, 34, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: none;
+  flex-direction: column;
+  min-width: 105px;
+  z-index: 50;
+}
+
+.shortcut-dropdown.open {
+  display: flex;
+}
+
+.shortcut-dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: 'Poppins', 'Noto Kufi Arabic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.shortcut-dropdown-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.shortcut-dropdown-btn.shortcut-delete-btn {
+  color: #ff6b6b;
+}
+
+.shortcut-dropdown-btn.shortcut-delete-btn:hover {
+  background: rgba(255, 107, 107, 0.18);
+}
+
+/* Card Content (Link) */
+.shortcut-card-link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  padding-top: 8px;
+}
+
+.shortcut-logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.shortcut-card:hover .shortcut-logo-img {
+  transform: scale(1.08);
+}
+
+.shortcut-card-fallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+.shortcut-card-title {
+  color: #ffffff;
+  font-family: 'Poppins', 'Noto Kufi Arabic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 84px;
+  text-shadow: none;
+  line-height: 1.2;
+}
+
+/* Add Shortcut Card (Exact Square, No Blur, Transparent White) */
+.add-shortcut-card {
+  width: 96px;
+  height: 96px;
+  aspect-ratio: 1 / 1;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: #ffffff;
+  padding: 0;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.add-shortcut-card:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+.add-shortcut-card .plus-icon {
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+  color: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.add-shortcut-card:hover .plus-icon {
+  transform: scale(1.15);
+}
+
+/* Modal Overlay & Card */
+.shortcut-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.shortcut-modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.shortcut-modal {
+  width: 90%;
+  max-width: 400px;
+  background: rgba(26, 28, 34, 0.68);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(160, 160, 160, 0.35);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  direction: ltr;
+  text-align: left;
+  color: #ffffff;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  animation: modal-pop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modal-pop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #ffffff;
+}
+
+.modal-form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-form-group label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.modal-form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(160, 160, 160, 0.35);
+  color: #ffffff;
+  font-size: 14.5px;
+  outline: none;
+  font-family: 'Poppins', 'Noto Kufi Arabic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: all 0.2s ease;
+  direction: ltr;
+  text-align: left;
+}
+
+.modal-form-group input.is-arabic {
+  font-family: 'Noto Kufi Arabic', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.modal-form-group input:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(180, 180, 180, 0.2);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.modal-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s ease;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.modal-cancel-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(160, 160, 160, 0.35);
+  color: #ffffff;
+}
+
+.modal-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.modal-save-btn {
+  background: rgba(255, 255, 255, 0.94);
+  color: #121316;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.18);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-save-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Bottom-Left Dynamic Greeting (Caveat Font & Keyboard Typewriter) */
+.bottom-left-greeting {
+  position: fixed;
+  bottom: 48px;
+  left: 32px;
+  z-index: 20;
+  display: flex;
+  align-items: baseline;
+  user-select: none;
+  pointer-events: none;
+}
+
+.greeting-text {
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+}
+
+.typewriter-cursor {
+  font-family: 'Caveat', -apple-system, sans-serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  margin-left: 2px;
+  animation: blinkCursor 0.85s infinite;
+  transition: opacity 0.4s ease;
+}
+
+.typewriter-cursor.hidden {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes blinkCursor {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Bottom-Right Branding: Mahmoud Logo + Divider + Vutamo Logo */
+.bottom-branding {
+  position: fixed;
+  bottom: 24px;
+  right: 28px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  user-select: none;
+  opacity: 0.85;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  cursor: default;
+}
+
+.bottom-branding:hover {
+  opacity: 1;
+}
+
+.branding-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
+}
+
+.branding-link:hover {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.branding-logo {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+  margin-right: 6px;
+}
+
+.branding-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.4);
+  display: inline-block;
+}
+
+.branding-logo-vutamo {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+
+.branding-appearance {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  display: inline-block;
+  margin-left: 6px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+
+/* ------------------------------------------------------------- */
+/* Settings Trigger Button (Above Bottom Branding)               */
+/* ------------------------------------------------------------- */
+.settings-trigger-btn {
+  position: fixed;
+  bottom: 58px;
+  right: 28px;
+  z-index: 21;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+  outline: none;
+}
+
+.settings-trigger-btn:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  transform: rotate(60deg) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.settings-trigger-btn.active {
+  background: rgba(255, 255, 255, 0.32);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  transform: rotate(180deg);
+}
+
+/* ------------------------------------------------------------- */
+/* Settings Side Drawer & Overlay                                */
+/* ------------------------------------------------------------- */
+.settings-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.settings-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.settings-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 90vw;
+  z-index: 999;
+  background: rgba(18, 20, 26, 0.88);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: -12px 0 45px rgba(0, 0, 0, 0.55);
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+}
+
+.settings-drawer.open {
+  transform: translateX(0);
+}
+
+.settings-drawer-header {
+  padding: 22px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.settings-drawer-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 16.5px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.settings-drawer-title i {
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.settings-drawer-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.settings-drawer-close:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.settings-drawer-body {
+  flex: 1;
+  padding: 22px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.setting-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.setting-item:hover {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.setting-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.setting-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.setting-label i {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.setting-desc {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.35;
+}
+
+/* Segmented Control for Clock Format */
+.setting-segmented-control {
+  display: flex;
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.segment-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.68);
+  padding: 7px 12px;
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.segment-btn:hover {
+  color: #ffffff;
+}
+
+.segment-btn.active {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+/* Custom Toggle Switch */
+.vutamo-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.vutamo-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.vutamo-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.vutamo-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.vutamo-switch input:checked+.vutamo-slider {
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.45);
+}
+
+.vutamo-switch input:checked+.vutamo-slider:before {
+  transform: translateX(20px);
+  background: #0f1115;
+}
+
+/* Blur Sub Control Slider */
+.setting-sub-control {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 3px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.setting-sub-control.hidden {
+  display: none;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.slider-val-badge {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.vutamo-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  cursor: pointer;
+}
+
+.vutamo-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vutamo-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* ------------------------------------------------------------- */
+/* Background Video Option Cards Grid                            */
+/* ------------------------------------------------------------- */
+.bg-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.bg-option-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+  user-select: none;
+}
+
+.bg-option-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.bg-option-card.active {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.22), 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.bg-option-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-option-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  filter: brightness(0.9);
+  transition: filter 0.25s ease, transform 0.3s ease;
+}
+
+.bg-option-card:hover .bg-option-thumb video {
+  filter: brightness(1.05);
+  transform: scale(1.05);
+}
+
+.bg-option-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 8.5px;
+  pointer-events: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.bg-option-card:hover .bg-option-badge {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.bg-option-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #0f1115;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.bg-option-card.active .bg-option-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bg-option-name {
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.2s ease;
+}
+
+.bg-option-card:hover .bg-option-name,
+.bg-option-card.active .bg-option-name {
+  color: #ffffff;
+  font-weight: 600;
+}
