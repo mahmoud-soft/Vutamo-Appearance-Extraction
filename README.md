@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://mahmoudsoft.com" target="_blank">
-    <img src="github/mahmoud_logo_github.png" alt="vutamo Appearance" width="520" height="auto">
-  </a>
-</p>
-
 ### About Me
 
 > I am a web designer and developer who transforms ideas into visually stunning, high-performing digital experiences. I craft modern interfaces tailored to each client's brand identity, writing clean, custom code from scratch without relying on heavy bloated frameworks to guarantee complete control over performance, speed, and seamless scalability. In addition, I build intuitive browser tools and digital solutions designed to elevate everyday productivity and visual aesthetics.
@@ -48,6 +42,12 @@
 ### Website
 
 > [mahmoudsoft.com](https://mahmoudsoft.com)
+
+### License & Intellectual Property
+
+> **Copyright © 2026 Mahmoud Soft. All Rights Reserved.**
+> 
+> This software is proprietary. Modifying, adapting, reverse engineering, redistributing, or creating derivative works based on this project in whole or in part without prior written permission from Mahmoud Soft is strictly prohibited.
 
 <br>
 
