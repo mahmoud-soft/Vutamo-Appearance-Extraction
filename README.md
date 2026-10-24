@@ -64,7 +64,7 @@
 
 | Version | Release Date | Description | Download |
 | :---: | :---: | :--- | :---: |
-| `v1.0.0` | 2026-10-23 | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [![Download ZIP](https://img.shields.io/badge/Download-ZIP-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/heads/main.zip) |
+| `v1.0.0` | 2026-10-23 | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [v1.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.0.0.zip) |
 
 ### Website
 
