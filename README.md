@@ -35,9 +35,9 @@
 
 ### Version History
 
-| Version | Release Date | Description | Download |
+| Version | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Release Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description | Download |
 | :---: | :---: | :--- | :---: |
-| `v1.0.0` | 2026-10-23 | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [v1.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.0.0.zip) |
+| `v1.0.0` | &nbsp;&nbsp;&nbsp;&nbsp;2026-10-23&nbsp;&nbsp;&nbsp;&nbsp; | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [v1.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.0.0.zip) |
 
 ### Website
 
