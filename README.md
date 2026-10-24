@@ -35,19 +35,19 @@
 
 ### Version History
 
-| Version | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Release Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description | Download |
+| Version | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Release&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description | Download |
 | :---: | :---: | :--- | :---: |
 | `v1.0.0` | &nbsp;&nbsp;&nbsp;&nbsp;2026-10-23&nbsp;&nbsp;&nbsp;&nbsp; | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [v1.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.0.0.zip) |
-
-### Website
-
-> [mahmoudsoft.com](https://mahmoudsoft.com)
 
 ### License & Intellectual Property
 
 > **Copyright © 2026 Mahmoud Soft. All Rights Reserved.**
 > 
 > This software is proprietary. Modifying, adapting, reverse engineering, redistributing, or creating derivative works based on this project in whole or in part without prior written permission from Mahmoud Soft is strictly prohibited.
+
+### Website
+
+> [mahmoudsoft.com](https://mahmoudsoft.com)
 
 <br>
 
