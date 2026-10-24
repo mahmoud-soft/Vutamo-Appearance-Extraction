@@ -4,17 +4,6 @@
   </a>
 </p>
 
-<p align="center">
-  <a href="mailto:mahmoudssoft@gmail.com"><img src="https://img.shields.io/badge/Email-323232?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
-  <a href="https://discord.gg/suewp7za7" target="_blank"><img src="https://img.shields.io/badge/Discord-323232?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://www.linkedin.com/in/mahmoud-soft-a6458b423/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-323232?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-  <a href="https://www.behance.net/mahmoudsoft" target="_blank"><img src="https://img.shields.io/badge/Behance-323232?style=for-the-badge&logo=behance&logoColor=white" alt="Behance"></a>
-  <a href="https://dribbble.com/mahmoud-soft" target="_blank"><img src="https://img.shields.io/badge/Dribbble-323232?style=for-the-badge&logo=dribbble&logoColor=white" alt="Dribbble"></a>
-  <a href="https://www.instagram.com/mahmoudssoft/" target="_blank"><img src="https://img.shields.io/badge/Instagram-323232?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"></a>
-  <a href="https://api.whatsapp.com/send?phone=96895519695" target="_blank"><img src="https://img.shields.io/badge/WhatsApp-323232?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp"></a>
-  <a href="https://www.pinterest.com/mahmoudssoft/" target="_blank"><img src="https://img.shields.io/badge/Pinterest-323232?style=for-the-badge&logo=pinterest&logoColor=white" alt="Pinterest"></a>
-</p>
-
 ### About Me
 
 > I am a web designer and developer who transforms ideas into visually stunning, high-performing digital experiences. I craft modern interfaces tailored to each client's brand identity, writing clean, custom code from scratch without relying on heavy bloated frameworks to guarantee complete control over performance, speed, and seamless scalability. In addition, I build intuitive browser tools and digital solutions designed to elevate everyday productivity and visual aesthetics.
@@ -22,16 +11,6 @@
 ### Project Concept
 
 > **vutamo Appearance** is a premium, high-performance Chromium New Tab extension designed to transform your daily browsing into an elegant, cinematic dashboard. Engineered with modern **Manifest V3** standards and lightweight vanilla JavaScript, it delivers ambient live-motion backgrounds, an intelligent search experience with real-time suggestions, drag-and-drop Google Apps launcher, customizable quick shortcuts, and live weather telemetry without sacrificing startup speed.
-
-### Built With
-
-> <img src="https://img.shields.io/badge/Chrome_Extension-Manifest_V3-323232?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Manifest V3"> <img src="https://img.shields.io/badge/JavaScript-ES6+-323232?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript"> <img src="https://img.shields.io/badge/HTML5-Modern_Semantic-323232?style=for-the-badge&logo=html5&logoColor=E34F26" alt="HTML5"> <img src="https://img.shields.io/badge/CSS3-Glassmorphism-323232?style=for-the-badge&logo=css3&logoColor=1572B6" alt="CSS3"> <img src="https://img.shields.io/badge/Weather-Open--Meteo-323232?style=for-the-badge&logo=forecast&logoColor=white" alt="Open-Meteo">
-
-<br>
-
-<p align="center">
-  <img src="github/before_and_after.png" alt="vutamo Appearance - Before & After">
-</p>
 
 ### Key Features
 
