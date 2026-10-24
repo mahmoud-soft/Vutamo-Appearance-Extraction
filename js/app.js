@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCancelEditProfile = document.getElementById('btn-cancel-edit-profile');
 
   function renderUserAvatar(dataUrl, userName) {
-    const initial = (userName || 'Mahmoud').trim().charAt(0).toUpperCase() || 'U';
+    const initial = (userName || 'User').trim().charAt(0).toUpperCase() || 'U';
     if (dataUrl) {
       if (googleAvatarCircle) {
         googleAvatarCircle.textContent = '';
@@ -401,8 +401,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function loadUserProfile() {
-    const savedName = localStorage.getItem(STORAGE_KEY_NAME) || 'Mahmoud';
-    const savedEmail = localStorage.getItem(STORAGE_KEY_EMAIL) || 'mahmoudssoft@gmail.com';
+    const savedName = localStorage.getItem(STORAGE_KEY_NAME) || 'User';
+    const savedEmail = localStorage.getItem(STORAGE_KEY_EMAIL) || 'user@user.com';
     const savedAvatar = localStorage.getItem(STORAGE_KEY_AVATAR) || '';
 
     if (accountNameEl) accountNameEl.textContent = savedName;
@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           try {
             localStorage.setItem(STORAGE_KEY_AVATAR, compressed);
-            const currentName = localStorage.getItem(STORAGE_KEY_NAME) || 'Mahmoud';
+            const currentName = localStorage.getItem(STORAGE_KEY_NAME) || 'User';
             renderUserAvatar(compressed, currentName);
           } catch (err) {
             console.warn('Could not save avatar:', err);
@@ -492,8 +492,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (accountEditBox) {
     accountEditBox.addEventListener('submit', (e) => {
       e.preventDefault();
-      const newName = (inputProfileName ? inputProfileName.value : '').trim() || 'Mahmoud';
-      const newEmail = (inputProfileEmail ? inputProfileEmail.value : '').trim() || 'mahmoudssoft@gmail.com';
+      const newName = (inputProfileName ? inputProfileName.value : '').trim() || 'User';
+      const newEmail = (inputProfileEmail ? inputProfileEmail.value : '').trim() || 'user@user.com';
 
       localStorage.setItem(STORAGE_KEY_NAME, newName);
       localStorage.setItem(STORAGE_KEY_EMAIL, newEmail);
