@@ -7,6 +7,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // -------------------------------------------------------------
+  // Dynamic Adaptive Favicon (White by default / dark mode, Black on light mode)
+  // -------------------------------------------------------------
+  function setupThemeFavicon() {
+    const favicon = document.getElementById('dynamic-favicon');
+    if (!favicon || !window.matchMedia) return;
+    const lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+    const updateIcon = (e) => {
+      favicon.href = e.matches ? 'assets/chrome/logo_new_tab_black.png' : 'assets/chrome/logo_new_tab_white.png';
+    };
+    updateIcon(lightQuery);
+    if (lightQuery.addEventListener) {
+      lightQuery.addEventListener('change', updateIcon);
+    } else if (lightQuery.addListener) {
+      lightQuery.addListener(updateIcon);
+    }
+  }
+  setupThemeFavicon();
+
+  // -------------------------------------------------------------
   // Vutamo Appearance Settings (Background Video, Clock format, Blur, Shortcuts)
   // -------------------------------------------------------------
   const STORAGE_KEY_VUTAMO_SETTINGS = 'vutamo_appearance_settings';

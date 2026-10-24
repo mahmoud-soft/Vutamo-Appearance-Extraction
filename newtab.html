@@ -7,7 +7,18 @@
   <title>New Tab</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="assets/chrome/logo_new_tab.png">
+  <link rel="icon" id="dynamic-favicon" href="assets/chrome/logo_new_tab_white.png">
+  <script>
+    (function () {
+      try {
+        var isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        var icon = document.getElementById('dynamic-favicon');
+        if (icon && isLight) {
+          icon.href = 'assets/chrome/logo_new_tab_black.png';
+        }
+      } catch (e) { }
+    })();
+  </script>
 </head>
 
 <body>
