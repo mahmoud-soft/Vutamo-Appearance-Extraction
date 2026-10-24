@@ -27,6 +27,12 @@
 
 > <img src="https://img.shields.io/badge/Chrome_Extension-Manifest_V3-323232?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Manifest V3"> <img src="https://img.shields.io/badge/JavaScript-ES6+-323232?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript"> <img src="https://img.shields.io/badge/HTML5-Modern_Semantic-323232?style=for-the-badge&logo=html5&logoColor=E34F26" alt="HTML5"> <img src="https://img.shields.io/badge/CSS3-Glassmorphism-323232?style=for-the-badge&logo=css3&logoColor=1572B6" alt="CSS3"> <img src="https://img.shields.io/badge/Weather-Open--Meteo-323232?style=for-the-badge&logo=forecast&logoColor=white" alt="Open-Meteo">
 
+<br>
+
+<p align="center">
+  <img src="github/before_and_after.png" alt="vutamo Appearance - Before & After">
+</p>
+
 ### Key Features
 
 > **Cinematic Ambient Video:** High-definition live motion background with adjustable frosted glass blur intensity and smooth performance.
@@ -56,9 +62,9 @@
 
 ### Version History
 
-| Version | Release Date | Description | Status |
+| Version | Release Date | Description | Download |
 | :---: | :---: | :--- | :---: |
-| `v1.0.0` | 2026-10-23 | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | 🚀 Latest |
+| `v1.0.0` | 2026-10-23 | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [![Download ZIP](https://img.shields.io/badge/Download-ZIP-238636?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/heads/main.zip) |
 
 ### Website
 
