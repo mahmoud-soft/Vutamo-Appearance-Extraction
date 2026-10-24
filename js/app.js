@@ -354,6 +354,157 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       accountCard.classList.remove('open');
       if (accountBtn) accountBtn.classList.remove('active');
+      if (accountEditBox) accountEditBox.classList.add('hidden');
+    });
+  }
+
+  // =========================================================================
+  // User Profile: Custom Avatar Upload & Editable Email / Name (v1.1.0)
+  // =========================================================================
+  const STORAGE_KEY_AVATAR = 'vutamo_user_avatar';
+  const STORAGE_KEY_NAME = 'vutamo_user_name';
+  const STORAGE_KEY_EMAIL = 'vutamo_user_email';
+
+  const avatarWrapper = document.getElementById('account-avatar-wrapper');
+  const inputAvatarFile = document.getElementById('input-avatar-file');
+  const googleAvatarCircle = document.getElementById('google-avatar-circle');
+  const cardAvatarCircle = document.getElementById('account-card-avatar-circle');
+  const accountNameEl = document.getElementById('account-name');
+  const accountEmailEl = document.getElementById('account-email');
+  const btnEditProfile = document.getElementById('btn-edit-profile');
+  const accountEditBox = document.getElementById('account-edit-box');
+  const inputProfileName = document.getElementById('input-profile-name');
+  const inputProfileEmail = document.getElementById('input-profile-email');
+  const btnCancelEditProfile = document.getElementById('btn-cancel-edit-profile');
+
+  function renderUserAvatar(dataUrl, userName) {
+    const initial = (userName || 'Mahmoud').trim().charAt(0).toUpperCase() || 'U';
+    if (dataUrl) {
+      if (googleAvatarCircle) {
+        googleAvatarCircle.textContent = '';
+        googleAvatarCircle.style.backgroundImage = `url("${dataUrl}")`;
+      }
+      if (cardAvatarCircle) {
+        cardAvatarCircle.textContent = '';
+        cardAvatarCircle.style.backgroundImage = `url("${dataUrl}")`;
+      }
+    } else {
+      if (googleAvatarCircle) {
+        googleAvatarCircle.style.backgroundImage = 'none';
+        googleAvatarCircle.textContent = initial;
+      }
+      if (cardAvatarCircle) {
+        cardAvatarCircle.style.backgroundImage = 'none';
+        cardAvatarCircle.textContent = initial;
+      }
+    }
+  }
+
+  function loadUserProfile() {
+    const savedName = localStorage.getItem(STORAGE_KEY_NAME) || 'Mahmoud';
+    const savedEmail = localStorage.getItem(STORAGE_KEY_EMAIL) || 'mahmoudssoft@gmail.com';
+    const savedAvatar = localStorage.getItem(STORAGE_KEY_AVATAR) || '';
+
+    if (accountNameEl) accountNameEl.textContent = savedName;
+    if (accountEmailEl) accountEmailEl.textContent = savedEmail;
+    renderUserAvatar(savedAvatar, savedName);
+  }
+
+  loadUserProfile();
+
+  // Avatar Click -> Trigger File Input
+  if (avatarWrapper && inputAvatarFile) {
+    avatarWrapper.addEventListener('click', (e) => {
+      e.stopPropagation();
+      inputAvatarFile.click();
+    });
+
+    inputAvatarFile.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const rawData = event.target.result;
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const maxDim = 256;
+          let w = img.width;
+          let h = img.height;
+
+          if (w > h) {
+            if (w > maxDim) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            }
+          } else {
+            if (h > maxDim) {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const compressed = canvas.toDataURL('image/jpeg', 0.88);
+
+          try {
+            localStorage.setItem(STORAGE_KEY_AVATAR, compressed);
+            const currentName = localStorage.getItem(STORAGE_KEY_NAME) || 'Mahmoud';
+            renderUserAvatar(compressed, currentName);
+          } catch (err) {
+            console.warn('Could not save avatar:', err);
+          }
+        };
+        img.src = rawData;
+      };
+      reader.readAsDataURL(file);
+      inputAvatarFile.value = '';
+    });
+  }
+
+  // Toggle Profile Edit Form
+  if (btnEditProfile && accountEditBox) {
+    btnEditProfile.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = accountEditBox.classList.contains('hidden');
+      if (isHidden) {
+        if (inputProfileName) inputProfileName.value = (accountNameEl ? accountNameEl.textContent : '').trim();
+        if (inputProfileEmail) inputProfileEmail.value = (accountEmailEl ? accountEmailEl.textContent : '').trim();
+        accountEditBox.classList.remove('hidden');
+        if (inputProfileName) inputProfileName.focus();
+      } else {
+        accountEditBox.classList.add('hidden');
+      }
+    });
+  }
+
+  if (btnCancelEditProfile && accountEditBox) {
+    btnCancelEditProfile.addEventListener('click', (e) => {
+      e.stopPropagation();
+      accountEditBox.classList.add('hidden');
+    });
+  }
+
+  if (accountEditBox) {
+    accountEditBox.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newName = (inputProfileName ? inputProfileName.value : '').trim() || 'Mahmoud';
+      const newEmail = (inputProfileEmail ? inputProfileEmail.value : '').trim() || 'mahmoudssoft@gmail.com';
+
+      localStorage.setItem(STORAGE_KEY_NAME, newName);
+      localStorage.setItem(STORAGE_KEY_EMAIL, newEmail);
+
+      if (accountNameEl) accountNameEl.textContent = newName;
+      if (accountEmailEl) accountEmailEl.textContent = newEmail;
+
+      const currentAvatar = localStorage.getItem(STORAGE_KEY_AVATAR) || '';
+      renderUserAvatar(currentAvatar, newName);
+
+      accountEditBox.classList.add('hidden');
     });
   }
 

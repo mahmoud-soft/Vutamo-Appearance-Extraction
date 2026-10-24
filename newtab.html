@@ -236,7 +236,7 @@
     <!-- Google Account Avatar Button & Exact Card -->
     <div class="google-account-wrapper">
       <button id="btn-google-account" class="google-avatar-btn" title="Google Account" aria-label="Google Account">
-        <div class="google-avatar-circle">U</div>
+        <div class="google-avatar-circle" id="google-avatar-circle">U</div>
       </button>
 
       <!-- Exact Google Account Card Popup -->
@@ -246,16 +246,42 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <!-- Profile Header Section (No Arrow, Solid Black U with White Border) -->
+        <!-- Profile Header Section (Solid Black U with White Border or Custom Image) -->
         <div class="account-header-box">
-          <div class="account-avatar-wrapper">
-            <div class="account-card-avatar-circle">U</div>
+          <div class="account-avatar-wrapper" id="account-avatar-wrapper" title="Click to upload profile photo">
+            <div class="account-card-avatar-circle" id="account-card-avatar-circle">U</div>
+            <div class="account-avatar-camera-badge" id="account-avatar-camera-badge" title="Change photo">
+              <i class="fa-solid fa-camera"></i>
+            </div>
+            <input type="file" id="input-avatar-file" accept="image/*" style="display: none;">
           </div>
 
           <div class="account-info-col">
-            <div class="account-name" id="account-name">Hello User</div>
+            <div class="account-name-row">
+              <div class="account-name" id="account-name">Mahmoud</div>
+              <button type="button" class="account-edit-btn" id="btn-edit-profile" title="Edit name & email" aria-label="Edit profile">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
+            <div class="account-email" id="account-email">mahmoudssoft@gmail.com</div>
           </div>
         </div>
+
+        <!-- Inline Profile Edit Box -->
+        <form class="account-edit-box hidden" id="account-edit-box">
+          <div class="account-edit-field">
+            <label for="input-profile-name">Name</label>
+            <input type="text" id="input-profile-name" placeholder="Your Name" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="account-edit-field">
+            <label for="input-profile-email">Email</label>
+            <input type="email" id="input-profile-email" placeholder="example@gmail.com" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="account-edit-actions">
+            <button type="button" class="account-edit-btn-cancel" id="btn-cancel-edit-profile">Cancel</button>
+            <button type="submit" class="account-edit-btn-save" id="btn-save-edit-profile">Save</button>
+          </div>
+        </form>
 
         <!-- Middle Action Box (Font Awesome Icons) -->
         <div class="account-action-box">

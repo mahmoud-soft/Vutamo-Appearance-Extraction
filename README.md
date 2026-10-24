@@ -37,7 +37,8 @@
 
 | Version | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Release&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description | Download |
 | :---: | :---: | :--- | :---: |
-| `v1.0.0` | &nbsp;&nbsp;&nbsp;&nbsp;2026-10-23&nbsp;&nbsp;&nbsp;&nbsp; | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [v1.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.0.0.zip) |
+| `v1.1.0` | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026-10-24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Custom profile avatar photo upload from device and editable personal email with persistent storage | [v1.1.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.1.0.zip) |
+| `v1.0.0` | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026-10-23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [v1.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.0.0.zip) |
 
 ### License & Intellectual Property
 
