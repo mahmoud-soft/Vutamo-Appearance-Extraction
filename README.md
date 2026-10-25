@@ -41,12 +41,6 @@
 | `v1.1.0` | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026-10-24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Custom profile avatar photo upload from device and editable personal email with persistent storage | [v1.1.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.1.0.zip) |
 | `v1.0.0` | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026-10-23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [v1.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.0.0.zip) |
 
-### License & Intellectual Property
-
-> **Copyright © 2026 Mahmoud Soft. All Rights Reserved.**
-> 
-> This software is proprietary. Modifying, adapting, reverse engineering, redistributing, or creating derivative works based on this project in whole or in part without prior written permission from Mahmoud Soft is strictly prohibited.
-
 ### Website
 
 > [mahmoudsoft.com](https://mahmoudsoft.com)
