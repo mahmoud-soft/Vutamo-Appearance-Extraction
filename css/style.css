@@ -15,18 +15,40 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Background Video */
-#bg-video {
+/* Background Elements */
+#bg-video,
+#bg-image {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 1;
+  filter: blur(var(--bg-blur, 0px));
+  transition: filter 0.3s ease, opacity 0.35s ease;
+}
+
+#bg-video {
   object-fit: cover;
   object-position: center bottom;
   display: block;
-  z-index: 1;
-  filter: blur(var(--bg-blur, 0px));
-  transition: filter 0.3s ease, opacity 0.25s ease;
+}
+
+#bg-video.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#bg-image {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#bg-image.active {
+  opacity: 1;
 }
 
 /* Google Navigation Bar */
@@ -2074,4 +2096,158 @@ body {
 .bg-option-card.active .bg-option-name {
   color: #ffffff;
   font-weight: 600;
+}
+
+/* Reset Background Button */
+.btn-reset-bg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.88);
+  padding: 6px 12px;
+  border-radius: 9px;
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+  user-select: none;
+}
+
+.btn-reset-bg:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.38);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-reset-bg:active {
+  transform: translateY(0);
+}
+
+.btn-reset-bg i {
+  font-size: 11px;
+  transition: transform 0.3s ease;
+}
+
+.btn-reset-bg:hover i {
+  transform: rotate(-45deg);
+}
+
+/* Background Current Status */
+.bg-current-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  flex-shrink: 0;
+}
+
+.status-text {
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Background Action Buttons */
+.bg-action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-bg-action {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  user-select: none;
+  outline: none;
+}
+
+.btn-bg-action:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+.btn-bg-action:active {
+  transform: translateY(0);
+}
+
+.btn-bg-action i {
+  font-size: 12px;
+}
+
+
+
+/* Floating Toast Notification */
+.vutamo-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: rgba(18, 20, 26, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.vutamo-toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.vutamo-toast i {
+  color: #10b981;
+  font-size: 15px;
+}
+
+.vutamo-toast i.error {
+  color: #ef4444;
 }

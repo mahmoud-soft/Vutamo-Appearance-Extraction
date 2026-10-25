@@ -22,16 +22,30 @@
 </head>
 
 <body>
-  <!-- Background Live Video -->
+  <!-- Background Elements (Live Video & Custom Wallpaper) -->
   <video id="bg-video" src="assets/videos/Background_1.mp4" autoplay muted loop playsinline></video>
+  <div id="bg-image" class="bg-image"></div>
   <script>
     (function () {
       try {
+        var bgType = localStorage.getItem('vutamo_bg_type');
         var v = document.getElementById('bg-video');
-        if (v) {
-          v.src = 'assets/videos/Background_1.mp4';
-          v.muted = true;
-          v.play().catch(function () { });
+        var img = document.getElementById('bg-image');
+        if (!bgType || bgType === 'default') {
+          if (v) {
+            v.src = 'assets/videos/Background_1.mp4';
+            v.muted = true;
+            v.play().catch(function () { });
+          }
+        } else if (bgType === 'image') {
+          var cachedImg = localStorage.getItem('vutamo_bg_cached_image');
+          if (cachedImg && img) {
+            img.style.backgroundImage = 'url("' + cachedImg + '")';
+            img.classList.add('active');
+            if (v) { v.style.display = 'none'; }
+          }
+        } else if (bgType === 'custom_video') {
+          if (v) { v.style.display = 'none'; }
         }
       } catch (e) { }
     })();
@@ -473,6 +487,38 @@
 
     <div class="settings-drawer-body">
 
+      <!-- Setting 0: Background Customization & Reset (v2.0.0) -->
+      <div class="setting-item">
+        <div class="setting-row">
+          <div class="setting-info">
+            <div class="setting-label">
+              <i class="fa-solid fa-image"></i>
+              <span>Background</span>
+            </div>
+            <p class="setting-desc">Change background or restore default</p>
+          </div>
+          <button type="button" class="btn-reset-bg" id="btn-reset-bg" title="Reset to default background">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+            <span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Current Background Status Pill -->
+        <div class="bg-current-status" id="bg-current-status">
+          <span class="status-dot"></span>
+          <span class="status-text" id="bg-status-text">Default Live Motion</span>
+        </div>
+
+        <!-- Change Background Button (From Device) -->
+        <div class="bg-action-buttons">
+          <label class="btn-bg-action" for="input-bg-file" title="Upload image or video from device">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span>Change Background</span>
+          </label>
+          <input type="file" id="input-bg-file" accept="image/*,video/mp4,video/webm" style="display: none;">
+        </div>
+      </div>
+
       <!-- Setting 1: Clock Format (12h vs 24h) & Show Seconds -->
       <div class="setting-item">
         <div class="setting-info">
@@ -549,6 +595,12 @@
   </aside>
 
   <script src="js/app.js"></script>
+
+  <!-- Floating Toast Notification (v2.0.0) -->
+  <div id="vutamo-toast" class="vutamo-toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-check" id="vutamo-toast-icon"></i>
+    <span id="vutamo-toast-msg"></span>
+  </div>
 </body>
 
 </html>

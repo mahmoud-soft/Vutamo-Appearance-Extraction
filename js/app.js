@@ -26,15 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
   setupThemeFavicon();
 
   // -------------------------------------------------------------
-  // Vutamo Appearance Settings (Background Video, Clock format, Blur, Shortcuts)
+  // Vutamo Appearance Settings (Background, Clock format, Blur, Shortcuts) - v2.0.0
   // -------------------------------------------------------------
   const STORAGE_KEY_VUTAMO_SETTINGS = 'vutamo_appearance_settings';
+  const DB_NAME = 'vutamo_db';
+  const DB_VERSION = 1;
+  const STORE_BG = 'backgrounds';
+
   const vutamoSettings = {
     clockFormat: '12h',      // '12h' | '24h'
     showSeconds: false,      // true | false
     bgBlurEnabled: false,    // true | false
     bgBlurAmount: 8,         // 2 to 24 (px)
-    showShortcuts: true      // true | false (entire section below search)
+    showShortcuts: true,     // true | false (entire section below search)
+    bgType: 'default',       // 'default' | 'image' | 'custom_video'
+    bgName: 'Default Live Motion'
   };
 
   try {
@@ -54,15 +60,190 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function applyBgVideo() {
-    const video = document.getElementById('bg-video');
-    if (!video) return;
-    const targetSrc = 'assets/videos/Background_1.mp4';
-    if (video.getAttribute('src') !== targetSrc) {
-      video.src = targetSrc;
+  // IndexedDB Storage Helpers for High-Resolution Wallpaper & Custom Video Blobs
+  function openVutamoDB() {
+    return new Promise((resolve, reject) => {
+      try {
+        const req = indexedDB.open(DB_NAME, DB_VERSION);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains(STORE_BG)) {
+            db.createObjectStore(STORE_BG);
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  async function saveBgToDB(key, data) {
+    const db = await openVutamoDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_BG, 'readwrite');
+      const store = tx.objectStore(STORE_BG);
+      store.put(data, key);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function getBgFromDB(key) {
+    const db = await openVutamoDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_BG, 'readonly');
+      const store = tx.objectStore(STORE_BG);
+      const req = store.get(key);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function clearBgFromDB(key) {
+    try {
+      const db = await openVutamoDB();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(STORE_BG, 'readwrite');
+        const store = tx.objectStore(STORE_BG);
+        store.delete(key);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    } catch (err) {
+      console.warn('IndexedDB clear error:', err);
     }
-    video.muted = true;
-    video.play().catch(() => {});
+  }
+
+  // Floating Toast Notification Helper
+  let toastTimer = null;
+  function showToast(message, type = 'success') {
+    const toast = document.getElementById('vutamo-toast');
+    const msgEl = document.getElementById('vutamo-toast-msg');
+    const iconEl = document.getElementById('vutamo-toast-icon');
+    if (!toast || !msgEl) return;
+
+    msgEl.textContent = message;
+    if (iconEl) {
+      if (type === 'error') {
+        iconEl.className = 'fa-solid fa-circle-exclamation error';
+      } else {
+        iconEl.className = 'fa-solid fa-circle-check';
+      }
+    }
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2800);
+  }
+
+  // Active custom video object URL tracker (revoked when replaced or reset)
+  let activeCustomVideoUrl = null;
+
+  async function applyBackground() {
+    const video = document.getElementById('bg-video');
+    const img = document.getElementById('bg-image');
+    const statusText = document.getElementById('bg-status-text');
+
+    if (!video || !img) return;
+
+    const bgType = vutamoSettings.bgType || 'default';
+
+    if (bgType === 'default') {
+      if (activeCustomVideoUrl) {
+        URL.revokeObjectURL(activeCustomVideoUrl);
+        activeCustomVideoUrl = null;
+      }
+      img.classList.remove('active');
+      img.style.backgroundImage = '';
+
+      video.classList.remove('hidden');
+      video.style.display = 'block';
+      const defaultSrc = 'assets/videos/Background_1.mp4';
+      if (video.getAttribute('src') !== defaultSrc) {
+        video.src = defaultSrc;
+      }
+      video.muted = true;
+      video.loop = true;
+      video.play().catch(() => {});
+
+      if (statusText) statusText.textContent = 'Default Live Motion';
+    } else if (bgType === 'image') {
+      const cached = localStorage.getItem('vutamo_bg_cached_image');
+      if (cached) {
+        img.style.backgroundImage = `url("${cached}")`;
+        img.classList.add('active');
+        video.classList.add('hidden');
+        video.pause();
+      }
+      // Also verify/load high-resolution version from IndexedDB
+      try {
+        const stored = await getBgFromDB('custom_bg');
+        if (stored && stored.data) {
+          img.style.backgroundImage = `url("${stored.data}")`;
+          img.classList.add('active');
+          video.classList.add('hidden');
+          video.pause();
+        }
+      } catch (e) {
+        console.warn('Could not load custom image from IndexedDB:', e);
+      }
+      if (statusText) statusText.textContent = vutamoSettings.bgName || 'Custom Wallpaper';
+    } else if (bgType === 'custom_video') {
+      img.classList.remove('active');
+      img.style.backgroundImage = '';
+      try {
+        const stored = await getBgFromDB('custom_bg');
+        if (stored && stored.blob) {
+          if (activeCustomVideoUrl) {
+            URL.revokeObjectURL(activeCustomVideoUrl);
+          }
+          activeCustomVideoUrl = URL.createObjectURL(stored.blob);
+          video.src = activeCustomVideoUrl;
+          video.classList.remove('hidden');
+          video.style.display = 'block';
+          video.muted = true;
+          video.loop = true;
+          video.play().catch(() => {});
+        } else {
+          await resetBackground(false);
+        }
+      } catch (e) {
+        console.warn('Could not load custom video from IndexedDB:', e);
+        await resetBackground(false);
+      }
+      if (statusText) statusText.textContent = vutamoSettings.bgName || 'Custom Video';
+    } else {
+      await resetBackground(false);
+    }
+  }
+
+  async function resetBackground(notify = true) {
+    if (activeCustomVideoUrl) {
+      URL.revokeObjectURL(activeCustomVideoUrl);
+      activeCustomVideoUrl = null;
+    }
+
+    try {
+      localStorage.removeItem('vutamo_bg_type');
+      localStorage.removeItem('vutamo_bg_cached_image');
+      await clearBgFromDB('custom_bg');
+    } catch (e) {
+      console.warn('Error clearing background storage:', e);
+    }
+
+    vutamoSettings.bgType = 'default';
+    vutamoSettings.bgName = 'Default Live Motion';
+    saveVutamoSettings();
+
+    await applyBackground();
+    syncSettingsUI();
+
+    if (notify) {
+      showToast('Default background restored');
+    }
   }
 
   function applyBgBlur() {
@@ -77,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  applyBgVideo(false);
+  applyBackground();
   applyBgBlur();
   applyShortcutsVisibility();
 
@@ -1243,6 +1424,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const blurValBadge = document.getElementById('blur-val-badge');
   const toggleShortcutsSection = document.getElementById('toggle-shortcuts-section');
 
+  // Background Settings Elements (v2.0.0)
+  const btnResetBg = document.getElementById('btn-reset-bg');
+  const bgStatusText = document.getElementById('bg-status-text');
+  const inputBgFile = document.getElementById('input-bg-file');
+
   function openSettingsDrawer() {
     if (settingsDrawer) settingsDrawer.classList.add('open');
     if (settingsDrawerOverlay) settingsDrawerOverlay.classList.add('open');
@@ -1293,6 +1479,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Update Settings UI elements to match current state
   function syncSettingsUI() {
+    // 0. Background status text
+    if (bgStatusText) {
+      bgStatusText.textContent = vutamoSettings.bgName || (vutamoSettings.bgType === 'default' ? 'Default Live Motion' : 'Custom Background');
+    }
+
     // 1. Clock format segmented buttons
     clockFormatBtns.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.format === vutamoSettings.clockFormat);
@@ -1323,7 +1514,116 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // -------------------------------------------------------------
+  // Background Customizer & Reset Listeners (v2.0.0)
+  // -------------------------------------------------------------
 
+  // Reset Background Button
+  if (btnResetBg) {
+    btnResetBg.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      await resetBackground(true);
+    });
+  }
+
+  // Change Background (Image or Video from device)
+  if (inputBgFile) {
+    inputBgFile.addEventListener('change', async (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      const isVideo = file.type.startsWith('video/');
+      const isImage = file.type.startsWith('image/');
+
+      if (!isVideo && !isImage) {
+        showToast('Unsupported file type. Use an image or MP4/WebM video.', 'error');
+        inputBgFile.value = '';
+        return;
+      }
+
+      showToast('Applying background...', 'success');
+
+      if (isVideo) {
+        try {
+          await saveBgToDB('custom_bg', {
+            type: 'video',
+            name: file.name,
+            blob: file,
+            updatedAt: Date.now()
+          });
+
+          vutamoSettings.bgType = 'custom_video';
+          vutamoSettings.bgName = file.name;
+
+          localStorage.setItem('vutamo_bg_type', 'custom_video');
+          saveVutamoSettings();
+
+          await applyBackground();
+          syncSettingsUI();
+          showToast(`Custom video "${file.name}" applied`);
+        } catch (err) {
+          console.error('Failed to save video to DB:', err);
+          showToast('Failed to save video file', 'error');
+        }
+      } else {
+        // Image processing & local caching for instant render
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+          const rawData = event.target.result;
+          const img = new Image();
+          img.onload = async () => {
+            const canvas = document.createElement('canvas');
+            const maxDim = 2560; // 2K/4K display clarity
+            let w = img.width;
+            let h = img.height;
+
+            if (w > maxDim || h > maxDim) {
+              if (w > h) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+            }
+
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const compressed = canvas.toDataURL('image/jpeg', 0.88);
+
+            try {
+              localStorage.setItem('vutamo_bg_cached_image', compressed);
+              localStorage.setItem('vutamo_bg_type', 'image');
+
+              await saveBgToDB('custom_bg', {
+                type: 'image',
+                name: file.name,
+                data: compressed,
+                updatedAt: Date.now()
+              });
+
+              vutamoSettings.bgType = 'image';
+              vutamoSettings.bgName = file.name;
+              saveVutamoSettings();
+
+              await applyBackground();
+              syncSettingsUI();
+              showToast(`Custom wallpaper "${file.name}" applied`);
+            } catch (err) {
+              console.warn('Could not save image background:', err);
+              showToast('Could not save custom wallpaper', 'error');
+            }
+          };
+          img.src = rawData;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      inputBgFile.value = '';
+    });
+  }
 
   // Clock format change (12h vs 24h)
   clockFormatBtns.forEach(btn => {

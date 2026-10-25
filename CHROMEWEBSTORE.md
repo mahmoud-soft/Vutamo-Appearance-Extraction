@@ -1,5 +1,5 @@
 # vutamo
 
 - **Name**: vutamo
-- **Version**: 1.1.0
+- **Version**: 2.0.0
 - **Description**: vutamo
