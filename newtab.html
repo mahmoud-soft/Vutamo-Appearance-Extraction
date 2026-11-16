@@ -8,48 +8,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" id="dynamic-favicon" href="assets/chrome/logo_new_tab_white.png">
-  <script>
-    (function () {
-      try {
-        var isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-        var icon = document.getElementById('dynamic-favicon');
-        if (icon && isLight) {
-          icon.href = 'assets/chrome/logo_new_tab_black.png';
-        }
-      } catch (e) { }
-    })();
-  </script>
+  <script src="js/theme-init.js"></script>
 </head>
 
 <body>
   <!-- Background Elements (Live Video & Custom Wallpaper) -->
-  <video id="bg-video" src="assets/videos/Background_1.mp4" autoplay muted loop playsinline></video>
+  <video id="bg-video" autoplay muted loop playsinline></video>
   <div id="bg-image" class="bg-image"></div>
-  <script>
-    (function () {
-      try {
-        var bgType = localStorage.getItem('vutamo_bg_type');
-        var v = document.getElementById('bg-video');
-        var img = document.getElementById('bg-image');
-        if (!bgType || bgType === 'default') {
-          if (v) {
-            v.src = 'assets/videos/Background_1.mp4';
-            v.muted = true;
-            v.play().catch(function () { });
-          }
-        } else if (bgType === 'image') {
-          var cachedImg = localStorage.getItem('vutamo_bg_cached_image');
-          if (cachedImg && img) {
-            img.style.backgroundImage = 'url("' + cachedImg + '")';
-            img.classList.add('active');
-            if (v) { v.style.display = 'none'; }
-          }
-        } else if (bgType === 'custom_video') {
-          if (v) { v.style.display = 'none'; }
-        }
-      } catch (e) { }
-    })();
-  </script>
+  <script src="js/bg-preload.js"></script>
 
   <!-- Google Header Elements -->
   <nav class="google-bar">
@@ -487,15 +453,15 @@
 
     <div class="settings-drawer-body">
 
-      <!-- Setting 0: Background Customization & Reset (v2.0.0) -->
+      <!-- Setting 0: Background Customization & Reset (v2.1.0) -->
       <div class="setting-item">
         <div class="setting-row">
           <div class="setting-info">
             <div class="setting-label">
-              <i class="fa-solid fa-image"></i>
+              <i class="fa-solid fa-panorama"></i>
               <span>Background</span>
             </div>
-            <p class="setting-desc">Change background or restore default</p>
+            <p class="setting-desc">Upload an image or video, or restore default</p>
           </div>
           <button type="button" class="btn-reset-bg" id="btn-reset-bg" title="Reset to default background">
             <i class="fa-solid fa-arrow-rotate-left"></i>
@@ -507,15 +473,22 @@
         <div class="bg-current-status" id="bg-current-status">
           <span class="status-dot"></span>
           <span class="status-text" id="bg-status-text">Default Live Motion</span>
+          <span class="bg-type-badge" id="bg-type-badge">Default</span>
         </div>
 
-        <!-- Change Background Button (From Device) -->
+        <!-- Separate Image & Video Upload Buttons (v2.1.0) -->
         <div class="bg-action-buttons">
-          <label class="btn-bg-action" for="input-bg-file" title="Upload image or video from device">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            <span>Change Background</span>
-          </label>
-          <input type="file" id="input-bg-file" accept="image/*,video/mp4,video/webm" style="display: none;">
+          <button type="button" class="btn-bg-action" id="btn-upload-image" title="Upload an image background from device">
+            <i class="fa-regular fa-image"></i>
+            <span>Add Image</span>
+          </button>
+          <input type="file" id="input-bg-image" accept="image/*,.png,.jpg,.jpeg,.webp,.gif,.avif,.bmp" hidden>
+
+          <button type="button" class="btn-bg-action" id="btn-upload-video" title="Upload a video background from device (MP4, WebM, MOV, M4V)">
+            <i class="fa-solid fa-video"></i>
+            <span>Add Video</span>
+          </button>
+          <input type="file" id="input-bg-video" accept="video/*,.mp4,.webm,.mov,.m4v,.ogv,.ogg,.mkv" hidden>
         </div>
       </div>
 

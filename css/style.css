@@ -33,6 +33,10 @@ body {
   display: block;
 }
 
+#bg-video.is-custom-video {
+  object-position: center center;
+}
+
 #bg-video.hidden {
   opacity: 0;
   pointer-events: none;
@@ -2129,6 +2133,17 @@ body {
   transform: translateY(0);
 }
 
+.btn-reset-bg:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 2px;
+}
+
+.btn-reset-bg:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .btn-reset-bg i {
   font-size: 11px;
   transition: transform 0.3s ease;
@@ -2161,11 +2176,38 @@ body {
 }
 
 .status-text {
+  flex: 1;
+  min-width: 0;
   font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.bg-type-badge {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.bg-type-badge.is-image {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #bae6fd;
+}
+
+.bg-type-badge.is-video {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #a7f3d0;
 }
 
 /* Background Action Buttons */
@@ -2183,7 +2225,7 @@ body {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #ffffff;
-  padding: 8px 10px;
+  padding: 9px 10px;
   border-radius: 9px;
   font-family: 'Poppins', 'Noto Kufi Arabic', sans-serif;
   font-size: 12px;
@@ -2201,12 +2243,29 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-bg-action.active {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.48);
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.12);
+}
+
 .btn-bg-action:active {
   transform: translateY(0);
 }
 
+.btn-bg-action:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 2px;
+}
+
+.btn-bg-action:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+}
+
 .btn-bg-action i {
-  font-size: 12px;
+  font-size: 12.5px;
 }
 
 

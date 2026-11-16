@@ -22,7 +22,7 @@
 >
 > **Smart Digital Clock & Typewriter Greeting:** Customizable 12h/24h clock with optional seconds counter and a dynamic typewriter greeting matching the time of day.
 >
-> **Appearance Settings Drawer:** Dedicated sidebar allowing instant customization of background wallpapers and videos, background blur amount, clock format, shortcuts visibility, and a quick reset background button.
+> **Appearance Settings Drawer:** Dedicated sidebar allowing instant customization of background images and live videos (via separate Add Image and Add Video buttons), background blur amount, clock format, shortcuts visibility, and a quick reset background button.
 
 ### How to Install (Chrome Developer Mode)
 
@@ -37,6 +37,7 @@
 
 | Version | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Release&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description | Download |
 | :---: | :---: | :--- | :---: |
+| `v2.1.0` | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026-11-16&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Separate Add Image and Add Video background buttons, expanded video format validation & MV3 CSP compliance | [v2.1.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v2.1.0.zip) |
 | `v2.0.0` | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026-10-25&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Change background from settings (upload image or video from device) with instant Reset Background button | [v2.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v2.0.0.zip) |
 | `v1.1.0` | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026-10-24&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Custom profile avatar photo upload from device and editable personal email with persistent storage | [v1.1.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.1.0.zip) |
 | `v1.0.0` | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026-10-23&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Initial release with live video backgrounds, Google Apps drawer, real-time search suggestions & weather widget | [v1.0.0.zip](https://github.com/mahmoud-soft/Vutamo-Appearance-Extraction/archive/refs/tags/v1.0.0.zip) |
